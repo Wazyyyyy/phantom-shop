@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Phantom Shop — cheat MW4</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0a0a;color:#f5f5f5;font-family:Inter,system-ui,sans-serif;font-size:14px;line-height:1.55}
+.page{width:100%;max-width:700px;margin:0 auto;background:#0a0a0a;background-image:repeating-linear-gradient(115deg,rgba(255,255,255,.018) 0 2px,transparent 2px 16px)}
+h1,h2,h3,.b1,.b2,.amount,.num,.fmark{font-family:Oswald,Inter,sans-serif;font-weight:700;letter-spacing:.01em}
+a{color:inherit;text-decoration:none}
+.nav{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid #1c1c1c}
+.brand{display:flex;align-items:center;gap:9px}
+.mark{width:44px;height:22px}
+.brandtxt{display:flex;flex-direction:column;line-height:1;font-size:14px;letter-spacing:.06em}
+.b2{color:#e11d2e}
+.links{display:flex;gap:14px;margin-left:auto;font-size:12px;color:#8b8b8b}
+.links a:hover{color:#fff}
+.btn{display:inline-block;font-family:Oswald,sans-serif;font-weight:500;text-transform:lowercase;letter-spacing:.06em;font-size:13px;padding:11px 20px;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);text-align:center;transition:.15s;cursor:pointer;border:0}
+.btn-red{background:#e11d2e;color:#fff}
+.btn-red:hover{background:#ff2b3d}
+.btn-ghost{background:#151515;color:#e8e8e8;border:1px solid #2a2a2a}
+.btn-ghost:hover{background:#1f1f1f;border-color:#e11d2e}
+.btn.small{padding:8px 14px;font-size:11px}
+.full{display:block;width:100%}
+.hero{padding:44px 20px 32px;border-bottom:1px solid #1c1c1c}
+.kicker{display:flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.14em;color:#e11d2e;margin-bottom:14px}
+.pulse{width:6px;height:6px;background:#e11d2e;border-radius:50%;box-shadow:0 0 0 3px rgba(225,29,46,.2)}
+.sub{max-width:440px;color:#9a9a9a;font-size:13.5px}
+.ctas{display:flex;gap:10px;margin-top:22px}
+.stats{display:flex;gap:26px;margin-top:30px;padding-top:20px;border-top:1px dashed #232323}
+.stats div{display:flex;flex-direction:column}
+.stats strong{font-family:Oswald,sans-serif;font-size:20px;color:#fff;font-weight:700}
+.stats span{font-size:10.5px;color:#6e6e6e;letter-spacing:.08em;text-transform:lowercase}
+.block{padding:34px 20px;border-bottom:1px solid #1c1c1c}
+h2{font-size:20px;text-transform:lowercase;display:flex;align-items:center;gap:10px;margin-bottom:20px}
+h2 span{font-family:Inter;font-size:11px;font-weight:600;color:#e11d2e;letter-spacing:.1em}
+h2::after{content:"";flex:1;height:1px;background:#1f1f1f}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.card{background:#101010;border:1px solid #1e1e1e;padding:14px;clip-path:polygon(10px 0,100% 0,100% 100%,0 100%,0 10px)}
+.card h3{font-size:13px;text-transform:lowercase;margin-bottom:5px;color:#fff}
+.card p{font-size:12px;color:#8a8a8a;line-height:1.5}
+.price{position:relative;padding:14px 12px}
+.price.hot{background:#150708;border-color:#e11d2e}
+.tag{position:absolute;top:0;right:0;background:#e11d2e;color:#fff;font-size:9px;font-weight:600;padding:3px 7px;letter-spacing:.1em;text-transform:uppercase}
+.amount{font-size:34px;line-height:1;color:#fff;margin:6px 0 2px}
+.amount span{font-size:15px;color:#e11d2e}
+.pl{font-size:10.5px;color:#6e6e6e;margin-bottom:10px;text-transform:lowercase}
+.price ul{list-style:none;font-size:11px;color:#9a9a9a;margin-bottom:14px;display:flex;flex-direction:column;gap:4px}
+.price li::before{content:"▸ ";color:#e11d2e}
+.paygrid{display:grid;grid-template-columns:1fr 190px;gap:14px}
+.lead{font-size:13px;color:#d8d8d8;margin-bottom:12px}
+.lead strong{color:#fff}
+ol{list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:8px}
+ol li{counter-increment:s;position:relative;padding-left:26px;font-size:12px;color:#9a9a9a}
+ol li::before{content:counter(s);position:absolute;left:0;top:1px;width:17px;height:17px;display:grid;place-items:center;background:#e11d2e;color:#fff;font-family:Oswald,sans-serif;font-size:10px;clip-path:polygon(5px 0,100% 0,100% calc(100% - 5px),calc(100% - 5px) 100%,0 100%,0 5px)}
+ol li b{color:#e8e8e8;font-weight:600}
+.warn{margin-top:12px;font-size:11px;color:#7a7a7a;border-left:2px solid #e11d2e;padding-left:10px}
+.payright{display:flex;flex-direction:column;gap:8px}
+.minicard{background:#101010;border:1px solid #1e1e1e;padding:11px}
+.mini-label{display:block;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#e11d2e;margin-bottom:5px}
+.mini-mail{display:block;font-size:11.5px;color:#fff;margin-bottom:9px;word-break:break-all}
+.minicard p{font-size:11px;color:#8a8a8a;margin-bottom:9px}
+.num{font-size:26px;color:#e11d2e;line-height:1;display:block;margin-bottom:6px}
+details{border-bottom:1px solid #1a1a1a;padding:11px 0}
+summary{cursor:pointer;font-size:13px;text-transform:lowercase;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;color:#e8e8e8}
+summary::after{content:"+";color:#e11d2e;font-size:16px;font-family:Oswald,sans-serif}
+details[open] summary::after{content:"–"}
+details p{font-size:12px;color:#8a8a8a;margin-top:8px;max-width:560px}
+footer{display:flex;align-items:center;gap:10px;padding:22px 20px;background:#0d0d0d}
+.fmark{width:40px;height:40px;flex:none;display:grid;place-items:center;background:#e11d2e;color:#fff;font-size:16px;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+.fmeta{flex:1}
+.fmeta strong{font-size:12.5px;text-transform:lowercase;display:block}
+.fmeta p{font-size:10px;color:#5f5f5f;margin-top:3px}
+footer .btn{white-space:nowrap}
+@media(max-width:640px){
+.links{display:none}
+.grid3,.grid4{grid-template-columns:repeat(2,1fr)}
+.paygrid{grid-template-columns:1fr}
+.amount{font-size:28px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="nav">
+<div class="brand">
+<svg viewBox="0 0 120 60" class="mark" aria-label="Phantom Shop">
+<polygon points="4,56 4,6 30,6 44,22 30,38 22,38 22,56" fill="#e11d2e"/>
+<polygon points="52,30 96,30 96,40 62,40 62,44 96,44 96,54 52,54 52,44 86,44 86,40 52,40" fill="#f5f5f5"/>
+</svg>
+<div class="brandtxt"><span class="b1">Phantom</span><span class="b2">Shop</span></div>
+</div>
+<nav class="links">
+<a href="#features">features</a>
+<a href="#prices">tarifs</a>
+<a href="#paiement">paiement</a>
+<a href="#faq">faq</a>
+</nav>
+<a href="https://discord.gg/HZcnkqmKh" class="btn btn-red small">discord</a>
+</header>
+
+<section class="hero">
+<div class="kicker"><span class="pulse"></span> mw4 · warzone · undetected · streamproof</div>
+<p class="sub">Aimbot réglable, ESP complet, no recoil. Livraison en moins de 5 minutes sur ton Discord, mises à jour incluses, support humain 24/7.</p>
+<div class="ctas">
+<a href="#prices" class="btn btn-red">voir les tarifs</a>
+<a href="https://discord.gg/HZcnkqmKh" class="btn btn-ghost">discord</a>
+</div>
+<div class="stats">
+<div><strong>0</strong><span>ban signalé à ce jour</span></div>
+<div><strong>&lt; 5 min</strong><span>livraison</span></div>
+</div>
+</section>
+
+<section id="features" class="block">
+<h2><span>01</span> ce qu'il y a dedans</h2>
+<div class="grid3">
+<div class="card"><h3>aimbot</h3><p>FOV, smooth, bone priority, humanisation. Tu règles tout, du discret au rage.</p></div>
+<div class="card"><h3>esp / wallhack</h3><p>Joueurs, distances, noms, loot, snaplines. Filtres par catégorie.</p></div>
+<div class="card"><h3>no recoil</h3><p>Contrôle de recul et de spread par arme, préréglé pour chaque meta.</p></div>
+<div class="card"><h3>streamproof</h3><p>Invisible en capture d'écran et en stream, sans manipulation.</p></div>
+<div class="card"><h3>undetected</h3><p>Bypass mis à jour après chaque patch, généralement sous 24h.</p></div>
+<div class="card"><h3>loader simple</h3><p>Un .exe, une clé, tu joues. Pas de dépendance, pas d'install lourde.</p></div>
+</div>
+</section>
+
+<section id="prices" class="block">
+<h2><span>02</span> tarifs</h2>
+<div class="grid4 prices">
+<div class="card price">
+<h3>jour</h3>
+<div class="amount">5<span>€</span></div>
+<p class="pl">1 clé · 24h</p>
+<ul><li>toutes les features</li><li>support discord</li><li>1 reset hwid</li></ul>
+<a href="https://www.paypal.me/PhantomShop1/5" target="_blank" rel="noopener" class="btn btn-ghost full">payer</a>
+</div>
+<div class="card price">
+<h3>semaine</h3>
+<div class="amount">20<span>€</span></div>
+<p class="pl">1 clé · 7 jours</p>
+<ul><li>toutes les features</li><li>support discord</li><li>2 resets hwid</li></ul>
+<a href="https://www.paypal.me/PhantomShop1/20" target="_blank" rel="noopener" class="btn btn-ghost full">payer</a>
+</div>
+<div class="card price hot">
+<div class="tag">le plus pris</div>
+<h3>mois</h3>
+<div class="amount">45<span>€</span></div>
+<p class="pl">1 clé · 30 jours</p>
+<ul><li>toutes les features</li><li>priorité support</li><li>resets illimités</li><li>accès aux betas</li></ul>
+<a href="https://www.paypal.me/PhantomShop1/45" target="_blank" rel="noopener" class="btn btn-red full">payer</a>
+</div>
+<div class="card price">
+<h3>à vie</h3>
+<div class="amount">150<span>€</span></div>
+<p class="pl">1 clé · sans limite</p>
+<ul><li>toutes les features</li><li>support privé</li><li>resets illimités</li><li>toutes les futures maj</li></ul>
+<a href="https://www.paypal.me/PhantomShop1/150" target="_blank" rel="noopener" class="btn btn-ghost full">payer</a>
+</div>
+</div>
+</section>
+
+<section id="paiement" class="block">
+<h2><span>03</span> comment payer</h2>
+<div class="paygrid">
+<div class="payleft">
+<p class="lead">Le paiement se fait <strong>directement sur PayPal</strong>, en 30 secondes. Clique sur le bouton de l'offre que tu veux, le montant est déjà rempli.</p>
+<ol>
+<li><b>Choisis ton offre</b> et clique sur « payer » : tu arrives sur ma page PayPal avec le bon montant.</li>
+<li><b>Choisis « Entre proches »</b> (ami proche / friends &amp; family) et non « Biens et services ». Sinon des frais sont prélevés et je reçois moins que le prix affiché.</li>
+<li><b>Vérifie le montant</b> et envoie. Aucun frais pour toi en proche.</li>
+<li><b>Envoie la capture</b> de la transaction dans un ticket Discord. Clé + loader en MP en moins de 5 minutes.</li>
+</ol>
+<p class="warn">En « entre proches », aucun frais mais pas de protection acheteur PayPal. C'est pour ça que je livre en moins de 5 minutes et que tout se passe sur le Discord : si un souci arrive, le ticket est la preuve et je remplace la clé.</p>
+</div>
+<div class="payright">
+<div class="minicard">
+<span class="mini-label">mon paypal</span>
+<span class="mini-mail">paypal.me/PhantomShop1</span>
+<a href="https://www.paypal.me/PhantomShop1" target="_blank" rel="noopener" class="btn btn-red full small">ouvrir paypal</a>
+</div>
+<div class="minicard">
+<span class="mini-label">autres moyens</span>
+<p>crypto (btc, eth, usdt, ltc), revolut, lydia, virement — en ticket.</p>
+<a href="https://discord.gg/HZcnkqmKh" class="btn btn-ghost full small">ouvrir un ticket</a>
+</div>
+</div>
+</section>
+
+<section class="block">
+<h2><span>04</span> comment ça marche</h2>
+<div class="grid3 steps">
+<div class="card"><span class="num">1</span><h3>tu paies</h3><p>Choisis ta durée et règle en 30 secondes.</p></div>
+<div class="card"><span class="num">2</span><h3>tu envoies la preuve</h3><p>Capture ou ID de transaction dans un ticket.</p></div>
+<div class="card"><span class="num">3</span><h3>tu reçois ta clé</h3><p>Loader + clé en MP, en moins de 5 minutes.</p></div>
+</div>
+</section>
+
+<section id="faq" class="block">
+<h2><span>05</span> faq</h2>
+<details><summary>pourquoi « entre proches » et pas « biens et services » ?</summary><p>Parce que PayPal prend une commission sur les paiements biens et services. En entre proches, le montant envoyé est le montant reçu. Le prix affiché correspond donc à ce que tu paies réellement, sans surplus.</p></details>
+<details><summary>est-ce que je risque un ban ?</summary><p>Aucun cheat n'est jamais à 100% sûr, mais le bypass est mis à jour après chaque patch et on prévient sur le Discord dès qu'une vague arrive. Le streamproof et l'aimbot humanisé réduisent énormément le risque.</p></details>
+<details><summary>quels launchers sont supportés ?</summary><p>Steam et Battle.net. Le loader fonctionne aussi en mode fenêtré et en plein écran.</p></details>
+<details><summary>remboursement ?</summary><p>Clé non utilisée : remboursée. Clé déjà lancée : échange ou avoir si le cheat ne fonctionne pas sur ta config, sur justification.</p></details>
+<details><summary>combien de PC par clé ?</summary><p>Une clé = un PC. Le reset HWID est gratuit une fois par jour, illimité sur les offres mois et à vie.</p></details>
+<details><summary>il faut quelle config ?</summary><p>Windows 10/11 64 bits, 8 Go de RAM. Rien de plus.</p></details>
+</section>
+
+<footer>
+<div class="fmark">PS</div>
+<div class="fmeta">
+<strong>phantom shop</strong>
+<p>Non affilié à Activision. MW4 et Call of Duty sont des marques déposées de leurs propriétaires respectifs.</p>
+</div>
+<a href="https://discord.gg/HZcnkqmKh" class="btn btn-red small">discord</a>
+</footer>
+</div>
+</body>
+</html>
