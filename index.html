@@ -91,7 +91,8 @@ h1 em{color:var(--red);font-style:normal;display:block}
 linear-gradient(135deg,rgba(225,29,46,.55),rgba(225,29,46,.05) 60%),
 repeating-linear-gradient(45deg,rgba(0,0,0,.35) 0 6px,transparent 6px 14px),#16161a;
 display:grid;place-items:center}
-.thumb b{font-family:Oswald,sans-serif;font-size:44px;color:rgba(255,255,255,.92);text-shadow:0 4px 18px rgba(0,0,0,.6)}
+.thumb b{font-family:Oswald,sans-serif;font-size:44px;color:rgba(255,255,255,.92);text-shadow:0 4px 18px rgba(0,0,0,.6);display:flex;flex-direction:column;align-items:center;line-height:.86}
+.thumb b small{font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;margin-top:6px;opacity:.9}
 .feat-body{padding:16px;display:flex;flex-direction:column;flex:1}
 .feat-body h3{font-size:15px;text-transform:uppercase;margin-bottom:5px}
 .feat-body p{font-size:11.5px;color:var(--muted);flex:1}
@@ -99,12 +100,6 @@ display:grid;place-items:center}
 .price{font-size:22px;color:#fff;line-height:1}
 .price span{font-size:13px;color:var(--red)}
 .badge{position:absolute;top:0;left:0;z-index:2;background:var(--red);color:#fff;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:3px 9px}
-
-/* filters */
-.filters{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:22px}
-.chip{font-size:11.5px;color:var(--muted);background:var(--panel);border:1px solid var(--line);padding:7px 14px;border-radius:100px;cursor:pointer;transition:.15s;font-family:inherit}
-.chip:hover{color:#fff;border-color:var(--line2)}
-.chip.on{background:var(--red);border-color:var(--red);color:#fff}
 
 /* products */
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
@@ -136,12 +131,25 @@ repeating-linear-gradient(45deg,rgba(0,0,0,.3) 0 5px,transparent 5px 12px),#1616
 .rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .rev{background:var(--panel);border:1px solid var(--line);padding:16px}
 .rev-top{display:flex;align-items:center;gap:9px;margin-bottom:11px}
-.av{width:30px;height:30px;flex:none;display:grid;place-items:center;background:rgba(225,29,46,.14);border:1px solid rgba(225,29,46,.35);color:#ff8b95;font-size:11px;font-weight:700;border-radius:50%}
+.av{width:30px;height:30px;flex:none;display:grid;place-items:center;background:rgba(225,29,46,.14);border:1px solid rgba(225,29,46,.35);color:#ff8b95;font-size:11px;font-weight:700;border-radius:50%;text-transform:uppercase}
 .rev-top b{font-size:12px;display:block;line-height:1.2}
 .rev-top small{font-size:10px;color:#22c55e}
 .rev .stars{font-size:11px;margin-bottom:8px;display:block}
 .rev p{font-size:11.5px;color:#9d9da6}
 .rev time{display:block;font-size:10px;color:var(--dim);margin-top:10px}
+
+/* review form */
+.revform{margin-top:16px;background:var(--panel);border:1px solid var(--line);padding:18px}
+.revform h3{font-size:13px;text-transform:uppercase;margin-bottom:12px}
+.rf-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.revform input,.revform textarea{width:100%;background:#0a0a0d;border:1px solid var(--line2);color:var(--txt);font-family:inherit;font-size:12px;padding:9px 11px;border-radius:3px;outline:none;transition:.15s}
+.revform input:focus,.revform textarea:focus{border-color:var(--red)}
+.revform textarea{min-height:74px;resize:vertical;margin-bottom:12px}
+.rf-name{flex:1;min-width:150px}
+.rf-stars{display:flex;gap:3px}
+.rf-stars button{background:none;border:0;cursor:pointer;font-size:19px;line-height:1;color:#3a3a44;padding:0;transition:.15s}
+.rf-stars button.on{color:#f5b301}
+.rf-stars button:hover{transform:scale(1.12)}
 
 /* faq */
 .faq{border-top:1px solid var(--line)}
@@ -201,6 +209,7 @@ footer{background:#060608;padding:44px 0 26px;border-top:1px solid var(--line)}
 linear-gradient(150deg,rgba(225,29,46,.5),rgba(225,29,46,.05) 65%),
 repeating-linear-gradient(45deg,rgba(0,0,0,.3) 0 5px,transparent 5px 12px),#16161a}
 .line-img .thumb b{font-size:18px}
+.line-img .thumb b small{font-size:7px;letter-spacing:.1em;margin-top:3px}
 .line-main{flex:1;min-width:0}
 .line-main h4{font-size:12.5px;text-transform:uppercase;font-family:Oswald,sans-serif;font-weight:600}
 .line-main .unit{font-size:10.5px;color:var(--dim);margin-bottom:8px}
@@ -272,7 +281,7 @@ repeating-linear-gradient(45deg,rgba(0,0,0,.3) 0 5px,transparent 5px 12px),#1616
 <a href="#boutique" class="btn btn-red">Voir la boutique</a>
 <a href="https://discord.gg/HZcnkqmKh" class="btn btn-ghost">Rejoindre le Discord</a>
 </div>
-<div class="rating"><span class="stars">★★★★★</span> 4,9 sur 5 · 312 avis vérifiés</div>
+<div class="rating"><span class="stars" id="heroStars">★★★★★</span> <span id="heroRate">5 sur 5 · 3 avis</span></div>
 <div class="trust">
 <div><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg>Anti-ban actif</div>
 <div><svg viewBox="0 0 24 24"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg>Livraison 5 min</div>
@@ -285,7 +294,7 @@ repeating-linear-gradient(45deg,rgba(0,0,0,.3) 0 5px,transparent 5px 12px),#1616
 <div class="sec-head"><div><h2>Les plus pris</h2><p>Les offres que la majorité des joueurs choisissent.</p></div><a href="#boutique">Tout voir →</a></div>
 <div class="rail">
 <article class="feat">
-<div class="feat-img"><div class="thumb"><b>30</b></div><span class="badge">Top ventes</span></div>
+<div class="feat-img"><div class="thumb"><b>30<small>jours</small></b></div><span class="badge">Top ventes</span></div>
 <div class="feat-body"><h3>Mois</h3><p>Toutes les features, priorité support, resets HWID illimités, accès aux betas.</p>
 <div class="feat-foot"><div class="price">45<span>€</span></div><button class="btn btn-red btn-sm add" data-name="Mois" data-price="45">Ajouter</button></div></div>
 </article>
@@ -295,7 +304,7 @@ repeating-linear-gradient(45deg,rgba(0,0,0,.3) 0 5px,transparent 5px 12px),#1616
 <div class="feat-foot"><div class="price">150<span>€</span></div><button class="btn btn-red btn-sm add" data-name="À vie" data-price="150">Ajouter</button></div></div>
 </article>
 <article class="feat">
-<div class="feat-img"><div class="thumb"><b>7</b></div></div>
+<div class="feat-img"><div class="thumb"><b>7<small>jours</small></b></div></div>
 <div class="feat-body"><h3>Semaine</h3><p>Une semaine complète pour tester sur tes vraies parties, sans engagement.</p>
 <div class="feat-foot"><div class="price">20<span>€</span></div><button class="btn btn-red btn-sm add" data-name="Semaine" data-price="20">Ajouter</button></div></div>
 </article>
@@ -304,36 +313,30 @@ repeating-linear-gradient(45deg,rgba(0,0,0,.3) 0 5px,transparent 5px 12px),#1616
 
 <section class="sec" id="boutique"><div class="wrap">
 <div class="sec-head"><div><h2>Boutique</h2><p>Choisis une durée, ajoute au panier, finalise sur Discord.</p></div></div>
-<div class="filters">
-<button class="chip on" data-f="all">Tout</button>
-<button class="chip" data-f="court">Court terme</button>
-<button class="chip" data-f="long">Long terme</button>
-<button class="chip" data-f="perm">Permanent</button>
-</div>
 <div class="grid">
 
-<article class="prod" data-c="court">
-<div class="prod-img"><div class="thumb"><b>1</b></div></div>
+<article class="prod">
+<div class="prod-img"><div class="thumb"><b>1<small>jour</small></b></div></div>
 <div class="prod-body"><h3>Jour</h3><p class="meta">1 clé · 24 heures</p>
 <ul><li>Toutes les features</li><li>Support Discord</li><li>1 reset HWID</li></ul>
 <div class="prod-foot"><div class="price">5<span>€</span></div><button class="btn btn-ghost btn-sm add" data-name="Jour" data-price="5">Ajouter</button></div></div>
 </article>
 
-<article class="prod" data-c="court">
-<div class="prod-img"><div class="thumb"><b>7</b></div></div>
+<article class="prod">
+<div class="prod-img"><div class="thumb"><b>7<small>jours</small></b></div></div>
 <div class="prod-body"><h3>Semaine</h3><p class="meta">1 clé · 7 jours</p>
 <ul><li>Toutes les features</li><li>Support Discord</li><li>2 resets HWID</li></ul>
 <div class="prod-foot"><div class="price">20<span>€</span></div><button class="btn btn-ghost btn-sm add" data-name="Semaine" data-price="20">Ajouter</button></div></div>
 </article>
 
-<article class="prod hot" data-c="long">
-<div class="prod-img"><div class="thumb"><b>30</b></div><span class="badge">Populaire</span></div>
+<article class="prod hot">
+<div class="prod-img"><div class="thumb"><b>30<small>jours</small></b></div><span class="badge">Populaire</span></div>
 <div class="prod-body"><h3>Mois</h3><p class="meta">1 clé · 30 jours</p>
 <ul><li>Toutes les features</li><li>Priorité support</li><li>Resets illimités</li><li>Accès aux betas</li></ul>
 <div class="prod-foot"><div class="price">45<span>€</span></div><button class="btn btn-red btn-sm add" data-name="Mois" data-price="45">Ajouter</button></div></div>
 </article>
 
-<article class="prod" data-c="perm">
+<article class="prod">
 <div class="prod-img"><div class="thumb"><b>∞</b></div></div>
 <div class="prod-body"><h3>À vie</h3><p class="meta">1 clé · sans limite</p>
 <ul><li>Toutes les features</li><li>Support privé</li><li>Resets illimités</li><li>Futures maj incluses</li></ul>
@@ -356,23 +359,37 @@ repeating-linear-gradient(45deg,rgba(0,0,0,.3) 0 5px,transparent 5px 12px),#1616
 </div></section>
 
 <section class="sec" id="avis"><div class="wrap">
-<div class="sec-head"><div><h2>Avis clients</h2><p>312 avis vérifiés · note moyenne 4,9 sur 5.</p></div></div>
-<div class="rgrid">
-<div class="rev"><div class="rev-top"><div class="av">KL</div><div><b>Kelian</b><small>Achat vérifié</small></div></div><span class="stars">★★★★★</span><p>Clé reçue en trois minutes après le ticket. Réglages expliqués, aimbot vraiment discret avec la config qu'il m'a donnée.</p><time>Il y a 2 jours</time></div>
-<div class="rev"><div class="rev-top"><div class="av">MR</div><div><b>Marouane</b><small>Achat vérifié</small></div></div><span class="stars">★★★★★</span><p>Trois mois dessus, aucun ban. Le bypass sort vite après chaque patch, c'est ce qui fait la différence.</p><time>Il y a 5 jours</time></div>
-<div class="rev"><div class="rev-top"><div class="av">TS</div><div><b>Tom S.</b><small>Achat vérifié</small></div></div><span class="stars">★★★★★</span><p>Support réactif même un dimanche soir, reset HWID fait direct après mon changement de carte mère. Rien à redire.</p><time>Il y a 1 semaine</time></div>
+<div class="sec-head"><div><h2>Avis clients</h2><p id="revHead">3 avis · note moyenne 5 sur 5.</p></div></div>
+<div class="rgrid" id="revList"></div>
+
+<div class="revform">
+<h3>Laisser un avis</h3>
+<form id="revForm">
+<div class="rf-row">
+<input id="rfName" class="rf-name" placeholder="Ton pseudo" maxlength="24" required>
+<div class="rf-stars" id="rfStars" role="radiogroup" aria-label="Note">
+<button type="button" data-v="1" aria-label="1 étoile">★</button>
+<button type="button" data-v="2" aria-label="2 étoiles">★</button>
+<button type="button" data-v="3" aria-label="3 étoiles">★</button>
+<button type="button" data-v="4" aria-label="4 étoiles">★</button>
+<button type="button" data-v="5" aria-label="5 étoiles">★</button>
+</div>
+</div>
+<textarea id="rfText" placeholder="Ton retour sur le produit et le support..." maxlength="400" required></textarea>
+<button class="btn btn-red btn-sm" type="submit">Publier l'avis</button>
+</form>
 </div>
 </div></section>
 
 <section class="sec" id="paiement"><div class="wrap">
-<div class="sec-head"><div><h2>Comment payer</h2><p>Paiement direct sur PayPal, montant déjà pré-rempli.</p></div></div>
+<div class="sec-head"><div><h2>Comment payer</h2><p>Paiement direct sur PayPal, montant déjà calculé.</p></div></div>
 <div class="pay">
 <div>
-<p style="font-size:13px;color:#d6d6de">Le paiement se fait <strong style="color:#fff">directement sur PayPal</strong>, en trente secondes. Clique sur « Payer » sur l'offre choisie : tu arrives sur ma page avec le bon montant.</p>
+<p style="font-size:13px;color:#d6d6de">Le paiement se fait <strong style="color:#fff">directement sur PayPal</strong>. Ajoute tes offres au panier, puis clique sur « Payer sur PayPal » : le total est reporté automatiquement sur ma page.</p>
 <ol>
-<li><b>Choisis ton offre</b> et clique sur « Payer » : le montant est déjà rempli.</li>
+<li><b>Remplis ton panier</b> avec les offres voulues.</li>
+<li><b>Clique sur « Payer sur PayPal »</b> : le montant exact s'ouvre, déjà rempli.</li>
 <li><b>Sélectionne « Entre proches »</b> (ami proche / friends &amp; family) et non « Biens et services ».</li>
-<li><b>Vérifie le montant</b> et envoie. Aucun frais pour toi.</li>
 <li><b>Envoie la capture</b> dans un ticket Discord. Clé et loader en MP en moins de 5 minutes.</li>
 </ol>
 <p class="warn">En « Entre proches », aucun frais mais pas de protection acheteur PayPal. C'est pour ça que je livre en moins de 5 minutes et que tout passe par le Discord : le ticket reste la preuve et je remplace la clé.</p>
@@ -419,14 +436,16 @@ repeating-linear-gradient(45deg,rgba(0,0,0,.3) 0 5px,transparent 5px 12px),#1616
 <div class="dr-body" id="drBody"></div>
 <div class="dr-foot">
 <div class="dr-tot"><span>Total</span><b id="drTotal">0 €</b></div>
-<p class="dr-note">Paiement sur PayPal, puis preuve en ticket Discord.</p>
-<button class="btn btn-red" id="checkout">Commander sur Discord</button>
+<p class="dr-note">Le total est reporté sur PayPal, puis preuve en ticket Discord.</p>
+<button class="btn btn-red" id="checkout">Payer sur PayPal</button>
 <button class="btn btn-ghost" id="clear">Vider le panier</button>
 </div>
 </aside>
 
 <script>
+/* ---------- panier ---------- */
 const KEY = 'phantom_cart_v1';
+const PAYPAL = 'https://www.paypal.me/PhantomShop1';
 const DISCORD = 'https://discord.gg/HZcnkqmKh';
 const drawer = document.getElementById('drawer');
 const ov = document.getElementById('ov');
@@ -441,18 +460,9 @@ let tToast;
 
 try { cart = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { cart = {}; }
 
-function save() {
-  localStorage.setItem(KEY, JSON.stringify(cart));
-  render();
-}
-
-function count() {
-  return Object.values(cart).reduce((s, i) => s + i.qty, 0);
-}
-
-function total() {
-  return Object.values(cart).reduce((s, i) => s + i.qty * i.price, 0);
-}
+function save() { localStorage.setItem(KEY, JSON.stringify(cart)); render(); }
+function count() { return Object.values(cart).reduce((s, i) => s + i.qty, 0); }
+function total() { return Object.values(cart).reduce((s, i) => s + i.qty * i.price, 0); }
 
 function flash(msg) {
   toastTxt.textContent = msg;
@@ -477,11 +487,7 @@ function setQty(name, delta) {
   save();
 }
 
-function removeItem(name) {
-  delete cart[name];
-  save();
-  flash(name + ' retiré');
-}
+function removeItem(name) { delete cart[name]; save(); flash(name + ' retiré'); }
 
 function render() {
   const n = count();
@@ -504,7 +510,7 @@ function render() {
     const line = document.createElement('div');
     line.className = 'line';
     line.innerHTML =
-      '<div class="line-img"><div class="thumb"><b>' + (item.qty > 1 ? '×' + item.qty : '1') + '</b></div></div>' +
+      '<div class="line-img"><div class="thumb"><b>×' + item.qty + '</b></div></div>' +
       '<div class="line-main"><h4></h4><div class="unit">' + item.price + ' € / clé</div>' +
       '<div class="qty"><button data-m="-" aria-label="Retirer un">−</button><span>' + item.qty + '</span><button data-m="+" aria-label="Ajouter un">+</button></div></div>' +
       '<div class="line-right"><span class="sum">' + item.qty * item.price + ' €</span><button class="rm">Retirer</button></div>';
@@ -520,7 +526,7 @@ function render() {
 function openDrawer() {
   drawer.classList.add('on');
   ov.classList.add('on');
-  body.ownerDocument.body.classList.add('lock');
+  document.body.classList.add('lock');
   drawer.setAttribute('aria-hidden', 'false');
 }
 
@@ -550,28 +556,85 @@ document.getElementById('checkout').addEventListener('click', async () => {
   const n = count();
   if (!n) { flash('Ton panier est vide'); return; }
 
+  const sum = total();
   const lines = Object.entries(cart).map(([name, i]) => '• ' + name + ' ×' + i.qty + ' — ' + (i.qty * i.price) + ' €');
-  const msg = 'Commande Phantom Shop\n' + lines.join('\n') + '\nTotal : ' + total() + ' €';
+  const msg = 'Commande Phantom Shop\n' + lines.join('\n') + '\nTotal : ' + sum + ' €';
 
-  try {
-    await navigator.clipboard.writeText(msg);
-    flash('Récap copié — colle-le dans ton ticket');
-  } catch (e) {
-    flash('Ouvre un ticket et indique ton panier');
-  }
-  setTimeout(() => window.open(DISCORD, '_blank', 'noopener'), 700);
+  try { await navigator.clipboard.writeText(msg); flash('Récap copié, ouverture de PayPal'); }
+  catch (e) { flash('Ouverture de PayPal'); }
+
+  setTimeout(() => window.open(PAYPAL + '/' + sum, '_blank', 'noopener'), 400);
 });
 
-document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
-  document.querySelectorAll('.chip').forEach(x => x.classList.remove('on'));
-  c.classList.add('on');
-  const f = c.dataset.f;
-  document.querySelectorAll('.prod').forEach(p => {
-    p.style.display = (f === 'all' || p.dataset.c === f) ? '' : 'none';
+/* ---------- avis ---------- */
+const RKEY = 'phantom_reviews_v1';
+const seed = [
+  { n: 'Kelian', r: 5, t: "Clé reçue en trois minutes après le ticket. Réglages expliqués, aimbot vraiment discret avec la config qu'il m'a donnée.", d: 'Il y a 2 jours' },
+  { n: 'Marouane', r: 5, t: "Trois mois dessus, aucun ban. Le bypass sort vite après chaque patch, c'est ce qui fait la différence.", d: 'Il y a 5 jours' },
+  { n: 'Tom S.', r: 5, t: 'Support réactif même un dimanche soir, reset HWID fait direct après mon changement de carte mère. Rien à redire.', d: 'Il y a 1 semaine' }
+];
+
+let reviews = [];
+try { reviews = JSON.parse(localStorage.getItem(RKEY) || 'null') || seed.slice(); } catch (e) { reviews = seed.slice(); }
+
+const revList = document.getElementById('revList');
+const revHead = document.getElementById('revHead');
+const heroRate = document.getElementById('heroRate');
+const heroStars = document.getElementById('heroStars');
+
+function starStr(n) { return '★'.repeat(n) + '☆'.repeat(5 - n); }
+
+function renderReviews() {
+  revList.innerHTML = '';
+  reviews.forEach(r => {
+    const el = document.createElement('div');
+    el.className = 'rev';
+    el.innerHTML = '<div class="rev-top"><div class="av"></div><div><b></b><small>Avis client</small></div></div>' +
+      '<span class="stars"></span><p></p><time></time>';
+    el.querySelector('.av').textContent = r.n.slice(0, 2);
+    el.querySelector('b').textContent = r.n;
+    el.querySelector('.stars').textContent = starStr(r.r);
+    el.querySelector('p').textContent = r.t;
+    el.querySelector('time').textContent = r.d;
+    revList.appendChild(el);
   });
-}));
+
+  const avg = reviews.length ? (reviews.reduce((s, r) => s + r.r, 0) / reviews.length) : 5;
+  const rounded = Math.round(avg * 10) / 10;
+  const label = reviews.length + (reviews.length > 1 ? ' avis' : ' avis');
+  revHead.textContent = label + ' · note moyenne ' + String(rounded).replace('.', ',') + ' sur 5.';
+  heroRate.textContent = String(rounded).replace('.', ',') + ' sur 5 · ' + label;
+  heroStars.textContent = starStr(Math.round(avg));
+}
+
+let note = 5;
+const starBtns = document.querySelectorAll('#rfStars button');
+
+function paintStars() {
+  starBtns.forEach(b => b.classList.toggle('on', Number(b.dataset.v) <= note));
+}
+
+starBtns.forEach(b => b.addEventListener('click', () => { note = Number(b.dataset.v); paintStars(); }));
+paintStars();
+
+document.getElementById('revForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const n = document.getElementById('rfName').value.trim();
+  const t = document.getElementById('rfText').value.trim();
+  if (!n || !t) return;
+
+  reviews.unshift({ n: n, r: note, t: t, d: "À l'instant" });
+  localStorage.setItem(RKEY, JSON.stringify(reviews));
+  renderReviews();
+
+  e.target.reset();
+  note = 5;
+  paintStars();
+  flash('Merci, ton avis est publié');
+});
 
 render();
+renderReviews();
 </script>
 </body>
 </html>
