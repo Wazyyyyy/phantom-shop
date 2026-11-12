@@ -113,15 +113,20 @@ repeating-linear-gradient(45deg,rgba(0,0,0,.3) 0 5px,transparent 5px 12px),#1616
 .fcell p{font-size:11.5px;color:var(--muted)}
 
 /* reviews */
+.revnote{font-size:11px;color:var(--dim);margin:-14px 0 20px;max-width:640px}
 .rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.rev{background:var(--panel);border:1px solid var(--line);padding:16px}
+.rev{background:var(--panel);border:1px solid var(--line);padding:16px;display:flex;flex-direction:column}
 .rev-top{display:flex;align-items:center;gap:9px;margin-bottom:11px}
 .av{width:30px;height:30px;flex:none;display:grid;place-items:center;background:rgba(225,29,46,.14);border:1px solid rgba(225,29,46,.35);color:#ff8b95;font-size:11px;font-weight:700;border-radius:50%;text-transform:uppercase}
 .rev-top b{font-size:12px;display:block;line-height:1.2}
-.rev-top small{font-size:10px;color:#22c55e}
+.rev-top small{font-size:10px;color:var(--dim)}
 .rev .stars{font-size:11px;margin-bottom:8px;display:block}
-.rev p{font-size:11.5px;color:#9d9da6}
-.rev time{display:block;font-size:10px;color:var(--dim);margin-top:10px}
+.rev p{font-size:11.5px;color:#9d9da6;flex:1}
+.rev-bot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;padding-top:9px;border-top:1px solid #17171b}
+.rev time{font-size:10px;color:var(--dim)}
+.report{background:none;border:0;color:var(--dim);font-size:10px;cursor:pointer;text-decoration:underline;padding:0;font-family:inherit}
+.report:hover{color:var(--red)}
+.report[disabled]{color:#22c55e;text-decoration:none;cursor:default}
 
 /* review form */
 .revform{margin-top:16px;background:var(--panel);border:1px solid var(--line);padding:18px}
@@ -135,6 +140,9 @@ repeating-linear-gradient(45deg,rgba(0,0,0,.3) 0 5px,transparent 5px 12px),#1616
 .rf-stars button{background:none;border:0;cursor:pointer;font-size:19px;line-height:1;color:#3a3a44;padding:0;transition:.15s}
 .rf-stars button.on{color:#f5b301}
 .rf-stars button:hover{transform:scale(1.12)}
+.rf-legal{font-size:10px;color:var(--dim);margin-top:11px;line-height:1.5;max-width:660px}
+.rf-legal a{color:var(--muted);text-decoration:underline}
+.hp{position:absolute;left:-9999px;opacity:0;height:0;width:0}
 
 /* faq */
 .faq{border-top:1px solid var(--line)}
@@ -321,6 +329,7 @@ repeating-linear-gradient(45deg,rgba(0,0,0,.3) 0 5px,transparent 5px 12px),#1616
 
 <section class="sec" id="avis"><div class="wrap">
 <div class="sec-head"><div><h2>Avis clients</h2><p id="revHead">3 avis · note moyenne 5 sur 5.</p></div></div>
+<p class="revnote">Avis non vérifiés : ils sont rédigés librement et ne sont pas rattachés à une commande. Tous les avis sont publiés puis modérés a posteriori, dans un délai de 48 h.</p>
 <div class="rgrid" id="revList"></div>
 
 <div class="revform">
@@ -328,6 +337,7 @@ repeating-linear-gradient(45deg,rgba(0,0,0,.3) 0 5px,transparent 5px 12px),#1616
 <form id="revForm">
 <div class="rf-row">
 <input id="rfName" class="rf-name" placeholder="Ton pseudo" maxlength="24" required>
+<input class="hp" id="rfHp" tabindex="-1" autocomplete="off" placeholder="Site">
 <div class="rf-stars" id="rfStars" role="radiogroup" aria-label="Note">
 <button type="button" data-v="1" aria-label="1 étoile">★</button>
 <button type="button" data-v="2" aria-label="2 étoiles">★</button>
@@ -338,6 +348,7 @@ repeating-linear-gradient(45deg,rgba(0,0,0,.3) 0 5px,transparent 5px 12px),#1616
 </div>
 <textarea id="rfText" placeholder="Ton retour sur le produit et le support..." maxlength="400" required></textarea>
 <button class="btn btn-red btn-sm" type="submit">Publier l'avis</button>
+<p class="rf-legal">En publiant, tu autorises Phantom Shop à afficher cet avis sur le site, à le raccourcir pour la mise en forme et à le retirer en cas de modération. Seuls ton pseudo et ton texte sont utilisés, aucun e-mail n'est demandé. Pour demander la suppression d'un avis, ouvre un <a href="https://discord.gg/HZcnkqmKh">ticket Discord</a>.</p>
 </form>
 </div>
 </div></section>
@@ -404,6 +415,19 @@ repeating-linear-gradient(45deg,rgba(0,0,0,.3) 0 5px,transparent 5px 12px),#1616
 </aside>
 
 <script>
+/* ---------- réglage webhook ---------- */
+const WEBHOOK = 'https://discord.com/api/webhooks/1570432154436116560/ebyGNIRyEivuYR5C-grTeHqFUcGQ4WxqV8nf4OMmGq0j75nl-iC74k6q-byEHf0xwCeE';
+const WEBHOOK_ON = !WEBHOOK.includes('REMPLACE');
+
+function send(payload) {
+  if (!WEBHOOK_ON) return;
+  fetch(WEBHOOK, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(() => {});
+}
+
 /* ---------- panier ---------- */
 const KEY = 'phantom_cart_v1';
 const PAYPAL = 'https://www.paypal.me/PhantomShop1';
@@ -528,6 +552,7 @@ document.getElementById('checkout').addEventListener('click', async () => {
 
 /* ---------- avis ---------- */
 const RKEY = 'phantom_reviews_v1';
+const RCOOL = 'phantom_last_rev';
 const seed = [
   { n: 'Kelian', r: 5, t: "Clé reçue en trois minutes après le ticket. Réglages expliqués, aimbot vraiment discret avec la config qu'il m'a donnée.", d: 'Il y a 2 jours' },
   { n: 'Marouane', r: 5, t: "Trois mois dessus, aucun ban. Le bypass sort vite après chaque patch, c'est ce qui fait la différence.", d: 'Il y a 5 jours' },
@@ -546,16 +571,22 @@ function starStr(n) { return '★'.repeat(n) + '☆'.repeat(5 - n); }
 
 function renderReviews() {
   revList.innerHTML = '';
-  reviews.forEach(r => {
+  reviews.forEach((r, i) => {
     const el = document.createElement('div');
     el.className = 'rev';
     el.innerHTML = '<div class="rev-top"><div class="av"></div><div><b></b><small>Avis client</small></div></div>' +
-      '<span class="stars"></span><p></p><time></time>';
+      '<span class="stars"></span><p></p>' +
+      '<div class="rev-bot"><time></time><button class="report">Signaler</button></div>';
     el.querySelector('.av').textContent = r.n.slice(0, 2);
     el.querySelector('b').textContent = r.n;
     el.querySelector('.stars').textContent = starStr(r.r);
     el.querySelector('p').textContent = r.t;
     el.querySelector('time').textContent = r.d;
+
+    const btn = el.querySelector('.report');
+    if (r.flag) { btn.textContent = 'Signalé'; btn.disabled = true; }
+    btn.addEventListener('click', () => report(r, i));
+
     revList.appendChild(el);
   });
 
@@ -564,6 +595,24 @@ function renderReviews() {
   revHead.textContent = reviews.length + ' avis · note moyenne ' + String(rounded).replace('.', ',') + ' sur 5.';
   heroRate.textContent = String(rounded).replace('.', ',') + ' sur 5 · ' + reviews.length + ' avis';
   heroStars.textContent = starStr(Math.round(avg));
+}
+
+function report(r, i) {
+  reviews[i].flag = true;
+  localStorage.setItem(RKEY, JSON.stringify(reviews));
+  renderReviews();
+  flash('Merci, avis signalé');
+
+  send({ embeds: [{
+    title: 'Signalement d\'avis',
+    color: 0xf5b301,
+    fields: [
+      { name: 'Pseudo', value: r.n, inline: true },
+      { name: 'Note', value: r.r + '/5', inline: true },
+      { name: 'Texte', value: r.t }
+    ],
+    timestamp: new Date().toISOString()
+  }] });
 }
 
 let note = 5;
@@ -578,13 +627,36 @@ paintStars();
 
 document.getElementById('revForm').addEventListener('submit', e => {
   e.preventDefault();
+
+  if (document.getElementById('rfHp').value) return;
+
+  const last = Number(localStorage.getItem(RCOOL) || 0);
+  if (Date.now() - last < 30000) {
+    flash('Attends 30 secondes avant un nouvel avis');
+    return;
+  }
+
   const n = document.getElementById('rfName').value.trim();
   const t = document.getElementById('rfText').value.trim();
   if (!n || !t) return;
 
-  reviews.unshift({ n: n, r: note, t: t, d: "À l'instant" });
+  const rev = { n: n, r: note, t: t, d: "À l'instant" };
+  reviews.unshift(rev);
   localStorage.setItem(RKEY, JSON.stringify(reviews));
+  localStorage.setItem(RCOOL, String(Date.now()));
   renderReviews();
+
+  send({ embeds: [{
+    title: 'Nouvel avis',
+    color: 0xe11d2e,
+    fields: [
+      { name: 'Pseudo', value: n, inline: true },
+      { name: 'Note', value: note + '/5', inline: true },
+      { name: 'Avis', value: t }
+    ],
+    footer: { text: 'À modérer si besoin' },
+    timestamp: new Date().toISOString()
+  }] });
 
   e.target.reset();
   note = 5;
